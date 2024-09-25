@@ -1,11 +1,18 @@
-import DessertCard from "./components/DessertCard"
-
+import DessertCard, {DessertCardProp} from "./components/DessertCard"
+import { useEffect, useState } from "react"
 const App = () => {
+  const [desserts, setDesserts] = useState<DessertCardProp[]>([])
+
+  useEffect(()=>{
+    fetch('/data.json')
+    .then(res => res.json())
+    .then(apiDesserts => setDesserts(apiDesserts))
+  },[desserts])
   return (
-    <div>
-      <DessertCard name = {"Waffle with Berries"}/>
-      <DessertCard name = {"Vanilla Bean Crème Brûlée"}/>
-      <DessertCard name = {"Macaron Mix of Five"}/>
+    <div className="dessert-grid">
+        {
+          desserts.map(dessert => <DessertCard{...dessert}/>)
+        }
     </div>
   )
 }

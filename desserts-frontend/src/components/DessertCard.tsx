@@ -1,11 +1,25 @@
-type DessertCardProp ={
-    name: string
+import AddToCartBtn from "./AddToCartBtn"
+
+export type DessertCardProp ={
+    name: string,
+    category: string,
+    price: number,
+    image:{
+      thumbnail: string,
+      mobile: string,
+      tablet: string,
+      desktop: string
+    }
 }
 
 const DessertCard = (props: DessertCardProp) => {
   return (
-    <div>
-        {props.name}
+    <div className="dessert-card">
+      <img src={props.image.desktop}/>
+        <AddToCartBtn/>
+        <h4>{props.category}</h4>
+        <h2>{props.name}</h2>
+        <h3>${props.price}</h3>
     </div>
   )
 }
